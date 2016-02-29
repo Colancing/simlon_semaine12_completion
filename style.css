@@ -1,0 +1,54 @@
+
+body {
+    background: #1c5570;
+    color: #ffffff;
+    font: 400 .9em/1.9 'Open Sans', Calibri, Helvetica, Arial, sans-serif;
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1, #go, #close {
+    margin: 50px auto;
+    font-size: 120%;
+    color: white;
+    text-transform: uppercase;
+}
+
+input, #answer, #results, button {
+    width: 60%;
+    margin: 20px auto 0;
+    height: 4em;
+    border: 1px lightgrey solid;
+    padding-left: 15px;
+
+}
+
+input {
+    display: block;
+    background-color: #21cf8f;
+    cursor: pointer;
+    color: white;
+    font-size: 115%;
+}
+
+#results {
+    color: white;
+    font-size: 80%;
+    margin: 0 auto;
+    text-align: left;
+    background-color: rgba(33, 207, 143, 0.11);
+    border: 1px lightgrey solid;
+    height: 100%;
+}
+
+#selected {
+    color: red;
+}
+
+#close {
+    display: none;
+}
+
+#go {
+    display: block;
+}
