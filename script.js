@@ -5,10 +5,10 @@ var findme = document.getElementById("input");
 var divresults = document.getElementById("results");
 var selection = -1;
 var arraydiv = document.getElementsByClassName("choice");
-
+var beforevalue;
+var beforerequest;
 
 function navigate(e) {
-    console.log(e.keyCode);
     var length = arraydiv.length;
     if (e.keyCode == 40 && length > 0) {
         if (selection > -1) {
@@ -29,17 +29,20 @@ function navigate(e) {
         arraydiv[selection].id = "selected";
     }
     else if (e.keyCode == 13 && selection > -1) {
-        arraydiv[selection].id = "";
-        findme.value = arraydiv[selection].innerHTML;
+        choosen(arraydiv[selection]);
     }
     else {
+        if (beforerequest && beforerequest.readyState < XMLHttpRequest.DONE) {
+            beforerequest.abort();
+        }
         selection = -1;
-        if (findme.value != 0) {
+        if (findme.value != 0 && findme.value != beforevalue) {
             gotophp();
         }
     }
 }
 function gotophp() {
+    beforevalue = findme.value;
     divresults.innerHTML = "";
     var xml = new XMLHttpRequest();
     xml.addEventListener('readystatechange', function () {
@@ -65,17 +68,17 @@ function gotophp() {
                 }
             }
         }
-    )
-    ;
+    );
     xml.open("POST", 'villes.php', true);
     xml.setRequestHeader("content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
     xml.send("findme=" + findme.value);
+    return xml;
 }
 
 /*Fin de gotophp*/
 
-function choosen() {
-    findme.value = this.innerHTML;
+function choosen(div) {
+    findme.value = div.innerHTML;
     divresults.innerHTML = "";
 }
 
